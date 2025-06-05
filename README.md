@@ -44,7 +44,7 @@ DB_PORT=5432
 
 # Variables usadas por docker-compose
 POSTGRES_DB=nombre_db
-POSTGRES_USER=postgres_user
+POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres_password
 
 ```
@@ -54,10 +54,10 @@ Ejecuta el siguiente comando para obtener una clave segura. Usa el que funcione 
 
 ```bash
 # En Linux/macOS:
-python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+python3 -c "import secrets; print(secrets.token_urlsafe(50))"
 
 # En Windows:
-py -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+py -c "import secrets; print(secrets.token_urlsafe(50))"
 ```
 
 4. Inicia los servicios con Docker Compose:
@@ -155,3 +155,4 @@ docker compose exec web pytest -v
 Los usuarios creados mediante la pagina o la API pueden usar sus credenciales para iniciar sesión en el sistema.
 
 **Ejemplo:** si el usuario `juan` crea un nuevo usuario con el correo `pedro@test.com` y contraseña `pablo123`, entonces se podrá iniciar sesión en el sistema usando ese correo y contraseña (`pedro@test.com` / `pablo123`).
+
